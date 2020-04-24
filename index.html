@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="naver-site-verification" content="b9635e66ed1e5c903b68878a4c4219ec6c394d10" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>얼굴해체분석기 - 인공지능이 분석한 내 얼굴</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+
+
+    <meta name="description" content="인공지능이 보는 내 얼굴은 어떨까?">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="얼굴해체분석기 - 인공지능이 분석한 내 얼굴">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="얼굴해체분석기 - 인공지능이 분석한 내 얼굴">
+    <meta property="og:description" content="인공지능이 보는 내 얼굴은 어떨까? 나는 사실 서구적인 얼굴? 성별, 나이, 인종을 하나 하나 분석해 드립니다.">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="/image/og_image.png">
+</head>
+
+<body>
+  	<script src="imagecrop.js">
+	</script>
+	<script src="script.js">
+	</script>
+	<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+	</script>
+
+	<div class="file-upload">
+    
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>클릭하거나 드래그해서 사진을 추가하세요!</h3>
+      <img id="upimg" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjNjY0NTQyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBhdGggZD0iTTY5LjMyNCwyNy4zMDNoLTM4LjMyYy0wLjgyOCwwLTEuNS0wLjY3MS0xLjUtMS41czAuNjcyLTEuNSwxLjUtMS41aDM4LjMyYzAuODI4LDAsMS41LDAuNjcxLDEuNSwxLjUgICBTNzAuMTUyLDI3LjMwMyw2OS4zMjQsMjcuMzAzeiI+PC9wYXRoPjwvZz48Zz48cGF0aCBkPSJNNTAuMTY0LDczLjA3OWMtMC44MjgsMC0xLjUtMC42NzEtMS41LTEuNVYzNS45NzZjMC0wLjgyOSwwLjY3Mi0xLjUsMS41LTEuNXMxLjUsMC42NzEsMS41LDEuNXYzNS42MDQgICBDNTEuNjY0LDcyLjQwOCw1MC45OTIsNzMuMDc5LDUwLjE2NCw3My4wNzl6Ij48L3BhdGg+PC9nPjxnPjxwYXRoIGQ9Ik02Ni4wMzksNTAuMjgyYy0wLjM0NSwwLTAuNjktMC4xMTgtMC45NzQtMC4zNTlMNTAuMjQxLDM3LjI1OEwzNy41ODcsNDkuODQ1Yy0wLjU4NSwwLjU4My0xLjUzNiwwLjU4My0yLjEyMS0wLjAwNiAgIGMtMC41ODQtMC41ODctMC41ODItMS41MzcsMC4wMDYtMi4xMjFsMTMuNjM1LTEzLjU2M2MwLjU1NC0wLjU1MSwxLjQzOC0wLjU4MywyLjAzMi0wLjA3N2wxNS44NzYsMTMuNTYzICAgYzAuNjMsMC41MzgsMC43MDQsMS40ODUsMC4xNjYsMi4xMTVDNjYuODg0LDUwLjEwNCw2Ni40NjMsNTAuMjgyLDY2LjAzOSw1MC4yODJ6Ij48L3BhdGg+PC9nPjwvc3ZnPg==">
+    </div>
+    <div class="dsc">사진은 분석 이외의 목적으로 절대 사용되지 않습니다.</div>
+  </div>
+
+  <div class="hidden" id="tutoimg">
+    <div id="tutodiv"><img id="tuto" src="/image/tuto.png"></div>
+    <div id="tutotext">
+      <br>
+      <h2>사진 자르는 팁</h2>
+      <br>
+      <p>머리 가장 윗부분과</p>
+      <p>목이 살짝 보이도록 잘라야</p>
+      <p>가장 정확해요.</p>
+      <br>
+      <p>왼쪽 그림을 참고하세요.</p>
+    </div>
+  </div>
+  <section class="hidden" id="sectionResize">
+    <div class="image-resize" id="imageResize"><img class="resize-img" id="fullImage"></div>
+    <br>
+  <button id="crop" class="croping-image"><span class='fa fa-crop'></span>자르기</button>
+  </section>
+
+
+
+  <div class="file-upload-content">
+    <img class="file-upload-image" id="face-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+
+
+        <div id="loading"></div>
+
+        <div id="grp"></div>
+
+      <a id="retry" href="/"><button type="button" class="remove-image">다른 사진으로 해보기<span class="image-title"></span></button></a>
+    </div>
+  </div>
+</div>
+
+
+
+            
+
+
+
+<div id="grp"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+ 
+    
+
+
+    // More API functions here:
+    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+
+    // the link to your model provided by Teachable Machine export panel
+    const URL_S = "https://teachablemachine.withgoogle.com/models/hHkdWqdF5/";
+    const URL_N = "https://teachablemachine.withgoogle.com/models/Un7wmU70M/";
+    const URL_I = "https://teachablemachine.withgoogle.com/models/oz7Ok_57G/";
+
+    let model, labelContainer, maxPredictions;
+
+    // Load the image model and setup the webcam
+
+
+    // run the webcam image through the image model
+    async function predict() {
+
+
+        document.getElementById("grp").innerHTML = '';
+
+
+
+        document.getElementById("loading").innerHTML = '\
+        <div class="box">\
+            <div class="cat">\
+                <div class="cat__body"></div>\
+                <div class="cat__body"></div>\
+                <div class="cat__tail"></div>\
+                <div class="cat__head"></div>\
+            </div>\
+            <div>분석 중 입니다...</div>\
+            <br>\
+        </div>\
+            ';
+
+
+        const modelURL_S = URL_S + "model.json";
+        const metadataURL_S = URL_S + "metadata.json";
+
+        const modelURL_N = URL_N + "model.json";
+        const metadataURL_N = URL_N + "metadata.json";
+
+        const modelURL_I = URL_I + "model.json";
+        const metadataURL_I = URL_I + "metadata.json";
+
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // or files from your local hard drive
+        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+        model_S = await tmImage.load(modelURL_S, metadataURL_S);
+        maxPredictions_S = model_S.getTotalClasses();
+
+        model_N = await tmImage.load(modelURL_N, metadataURL_N);
+        maxPredictions_N = model_N.getTotalClasses();
+
+        model_I = await tmImage.load(modelURL_I, metadataURL_I);
+        maxPredictions_I = model_I.getTotalClasses();
+
+        labelContainer_S = document.getElementById("label-container-s");
+
+        labelContainer_N = document.getElementById("label-container-n");
+
+        labelContainer_I = document.getElementById("label-container-i");
+
+        // predict can take in an image, video or canvas html elemen
+        var image_face = document.getElementById("face-image");
+
+        const prediction_S = await model_S.predict(image_face, false);
+
+        const prediction_N = await model_N.predict(image_face, false);
+
+        const prediction_I = await model_I.predict(image_face, false);
+
+        var g_sn = parseInt(prediction_S[0].probability.toFixed(2) * 100);
+        var g_sy = parseInt(prediction_S[1].probability.toFixed(2) * 100);
+
+        var g_n0 = parseInt(prediction_N[4].probability.toFixed(2) * 100);
+        var g_n1 = parseInt(prediction_N[2].probability.toFixed(2) * 100);
+        var g_n2 = parseInt(prediction_N[0].probability.toFixed(2) * 100);
+        var g_n3 = parseInt(prediction_N[1].probability.toFixed(2) * 100);
+        var g_n4 = parseInt(prediction_N[3].probability.toFixed(2) * 100);
+
+        var g_i0 = parseInt(prediction_I[0].probability.toFixed(2) * 100);
+        var g_i1 = parseInt(prediction_I[1].probability.toFixed(2) * 100);
+        var g_i2 = parseInt(prediction_I[2].probability.toFixed(2) * 100);
+        var g_i3 = parseInt(prediction_I[3].probability.toFixed(2) * 100);
+
+        document.getElementById("loading").innerHTML = '';
+ 
+        var result_text = "";
+
+        if (g_sn > 75) {
+          result_text += "남자, ";
+        } 
+        else if (g_sn <= 75 && g_sn >= 60) {
+          result_text += "여자 섞인 남자, ";
+        } 
+        else if (g_sn < 60 && g_sn > 40) {
+          result_text += "중성, ";
+        } 
+        else if (g_sn <= 40 && g_sn >= 25) {
+          result_text += "남자 섞인 여자, ";
+        } 
+        else if (g_sn < 25) {
+          result_text += "여자, ";
+        }
+
+        var tmp = Math.max(g_n0, g_n1, g_n2, g_n3, g_n4);
+        switch (tmp) { // 나이
+          case g_n0:
+            result_text += "8세 이하, ";
+            break;
+          case g_n1:
+            result_text += "8 ~ 15세, ";
+            break;
+          case g_n2:
+            result_text += "15 ~ 27세, ";
+            break;
+          case g_n3:
+            result_text += "27 ~ 35세, ";
+            break;
+          case g_n4:
+            result_text += "35세 이상, ";
+            break;            
+        }
+
+        var gi0 = g_i0;
+        var gi1 = g_i1;
+        var gi2 = g_i2;
+        var gi3 = g_i3;
+        tmp = Math.max(gi0, gi1, gi2, gi3);
+        switch (tmp) { // 인종 1
+          case gi0:
+            result_text += "동양계, ";
+            gi0 = 0;
+            break;
+          case gi1:
+            result_text += "아프리카계, ";
+            gi1 = 0;
+            break;
+          case gi2:
+            result_text += "라틴계, ";
+            gi2 = 0;
+            break;
+          case gi3:
+            result_text += "서양계, ";
+            gi3 = 0;
+            break;          
+        }
+  
+        tmp = Math.max(gi0, gi1, gi2, gi3);
+        if(tmp >= 25) {
+          switch (tmp) { // 인종 1
+            case gi0:
+              result_text += "동양계, ";
+              break;
+            case gi1:
+              result_text += "아프리카계, ";
+              break;
+            case gi2:
+              result_text += "라틴계, ";
+              break;
+            case gi3:
+              result_text += "서양계, ";
+              break;          
+          }
+        }
+
+   
+
+        document.getElementById("grp").innerHTML = '\
+        <div class="wrapper">\
+          <h2>인공지능이 보는 당신의 얼굴</h2>\
+            <h4>' + result_text + '</h4>\
+            <div class="pie-charts">\
+                <div class="pieID--micro-skills pie-chart--wrapper">\
+                    <h3>성별</h3>\
+                    <div class="pie-chart">\
+                        <div class="pie-chart__pie"></div>\
+                        <ul class="pie-chart__legend">\
+                            <li><em>남자</em><span>' + g_sn + '</span></li>\
+                            <li><em>여자</em><span>' + g_sy + '</span></li>\
+                        </ul>\
+                    </div>\
+                </div>\
+                <div class="pieID--categories pie-chart--wrapper">\
+                    <h3>나이</h3>\
+                    <div class="pie-chart">\
+                        <div class="pie-chart__pie"></div>\
+                        <ul class="pie-chart__legend">\
+                            <li><em>8세 이하</em><span>' + g_n0 + '</span></li>\
+                            <li><em>8 ~ 15세</em><span>' + g_n1 + '</span></li>\
+                            <li><em>15 ~ 27세</em><span>' + g_n2 + '</span></li>\
+                            <li><em>27 ~ 39세</em><span>' + g_n3 + '</span></li>\
+                            <li><em>39세 이상</em><span>' + g_n4 + '</span></li>\
+                        </ul>\
+                    </div>\
+                </div>\
+                <div class="pieID--operations pie-chart--wrapper">\
+                    <h3>인종</h3>\
+                    <div class="pie-chart">\
+                        <div class="pie-chart__pie"></div>\
+                        <ul class="pie-chart__legend">\
+                            <li><em>동양계</em><span>' + g_i0 + '</span></li>\
+                            <li><em>아프리카계</em><span>' + g_i1 + '</span></li>\
+                            <li><em>라틴계</em><span>' + g_i2 + '</span></li>\
+                            <li><em>서양계</em><span>' + g_i3 + '</span></li>\
+                        </ul>\
+                    </div>\
+                </div>\
+            </div>\
+        </div>\
+        <br>\
+        ';
+
+
+        function sliceSize(dataNum, dataTotal) {
+          return (dataNum / dataTotal) * 360;
+        }
+
+        function addSlice(id, sliceSize, pieElement, offset, sliceID, color) {
+          $(pieElement).append("<div class='slice "+ sliceID + "'><span></span></div>");
+          var offset = offset - 1;
+          var sizeRotation = -179 + sliceSize;
+
+          $(id + " ." + sliceID).css({
+            "transform": "rotate(" + offset + "deg) translate3d(0,0,0)"
+          });
+
+          $(id + " ." + sliceID + " span").css({
+            "transform"       : "rotate(" + sizeRotation + "deg) translate3d(0,0,0)",
+            "background-color": color
+          });
+        }
+
+        function iterateSlices(id, sliceSize, pieElement, offset, dataCount, sliceCount, color) {
+          var
+            maxSize = 179,
+            sliceID = "s" + dataCount + "-" + sliceCount;
+
+          if( sliceSize <= maxSize ) {
+            addSlice(id, sliceSize, pieElement, offset, sliceID, color);
+          } else {
+            addSlice(id, maxSize, pieElement, offset, sliceID, color);
+            iterateSlices(id, sliceSize-maxSize, pieElement, offset+maxSize, dataCount, sliceCount+1, color);
+          }
+        }
+
+        var iii =0;
+
+        function createPie(id) {
+          var
+            listData      = [],
+            listTotal     = 0,
+            offset        = 0,
+            i             = 0,
+            pieElement    = id + " .pie-chart__pie"
+            dataElement   = id + " .pie-chart__legend"
+
+            color         = [
+              "#5561D6",
+              "#F0497E",
+              "#EBAAA7",
+              "#6A9995",
+              "#53744E",
+              "#F5BA67",
+              "#E6806C",
+              "#FF7745",
+              "#36C785",
+              "#7942C5",
+              "#FFED45"
+            ];
+
+
+          $(dataElement+" span").each(function() {
+            listData.push(Number($(this).html()));
+          });
+
+          for(i = 0; i < listData.length; i++) {
+            listTotal += listData[i];
+          }
+
+          for(i=0; i < listData.length; i++) {
+            var size = sliceSize(listData[i], listTotal);
+            iterateSlices(id, size, pieElement, offset, i, 0, color[iii]);
+            $(dataElement + " li:nth-child(" + (i + 1) + ")").css("border-color", color[iii]);
+            offset += size;
+            iii++;
+          }
+        }
+
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+
+            return a;
+        }
+
+        function createPieCharts() {
+          createPie('.pieID--micro-skills' );
+          createPie('.pieID--categories' );
+          createPie('.pieID--operations' );
+        }
+
+        createPieCharts();
+           
+
+
+
+
+    }
+    </script>
+
+                
+            
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+    <br>
+    
+      
+  <!-- Go to www.addthis.com/dashboard to customize your tools -->
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1b34144a26d9e"></script>
+
+    <footer>
+      <p>Copyright © 2020. yhcho All rights reserved.</p>
+      <address></address>
+    </footer>
+  </body>
+  
+  
+  <!--
+Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+Copyright (c) 2020 by Maciej Caputa (https://codepen.io/MaciejCaputa/pen/VjVpRZ)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+
+Copyright (c) 2020 by Rplus (https://codepen.io/Rplus/pen/PWZYRM)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+Copyright (c) 2020 by Josh (https://codepen.io/joshhunt18/pen/NPKEzQ)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-->
+</html>
