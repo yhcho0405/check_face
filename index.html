@@ -2,6 +2,16 @@
 <html>
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164530014-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-164530014-1');
+  </script>
+
   <meta name="naver-site-verification" content="b9635e66ed1e5c903b68878a4c4219ec6c394d10" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
@@ -33,7 +43,7 @@
 	</script>
 
 	<div class="file-upload">
-    
+
   <div class="image-upload-wrap">
     <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
     <div class="drag-text">
@@ -80,7 +90,7 @@
 
 
 
-            
+
 
 
 
@@ -89,8 +99,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
- 
-    
+
+
 
 
     // More API functions here:
@@ -180,21 +190,21 @@
         var g_i3 = parseInt(prediction_I[3].probability.toFixed(2) * 100);
 
         document.getElementById("loading").innerHTML = '';
- 
+
         var result_text = "";
 
         if (g_sn > 75) {
           result_text += "남자, ";
-        } 
+        }
         else if (g_sn <= 75 && g_sn >= 60) {
           result_text += "여자 섞인 남자, ";
-        } 
+        }
         else if (g_sn < 60 && g_sn > 40) {
           result_text += "중성, ";
-        } 
+        }
         else if (g_sn <= 40 && g_sn >= 25) {
           result_text += "남자 섞인 여자, ";
-        } 
+        }
         else if (g_sn < 25) {
           result_text += "여자, ";
         }
@@ -215,7 +225,7 @@
             break;
           case g_n4:
             result_text += "35세 이상, ";
-            break;            
+            break;
         }
 
         var gi0 = g_i0;
@@ -239,9 +249,9 @@
           case gi3:
             result_text += "서양계, ";
             gi3 = 0;
-            break;          
+            break;
         }
-  
+
         tmp = Math.max(gi0, gi1, gi2, gi3);
         if(tmp >= 25) {
           switch (tmp) { // 인종 1
@@ -256,11 +266,11 @@
               break;
             case gi3:
               result_text += "서양계, ";
-              break;          
+              break;
           }
         }
 
-   
+
 
         document.getElementById("grp").innerHTML = '\
         <div class="wrapper">\
@@ -402,7 +412,7 @@
         }
 
         createPieCharts();
-           
+
 
 
 
@@ -410,14 +420,14 @@
     }
     </script>
 
-                
-            
+
+
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 
     <br>
-    
-      
+
+
   <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1b34144a26d9e"></script>
 
@@ -426,8 +436,8 @@
       <address></address>
     </footer>
   </body>
-  
-  
+
+
   <!--
 Copyright (c) 2020 by Aaron Vanston (https://codepen.io/aaronvanston/pen/yNYOXR)
 
