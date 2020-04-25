@@ -32,7 +32,6 @@
   cursor: pointer;
 }
 
-// 출처: https://tyson.tistory.com/90 [TysonWorld]
 
 .dsc {
   color: #664542;
@@ -41,7 +40,7 @@
 
 #tutoimg {
   width:100%;
-  height: 250px;
+  height: 200px;
 
 }
 
@@ -55,7 +54,7 @@
 
 #tuto {
   height: 100%;
-  margin-right:10px;
+  margin-right:13px;
 }
 
 #tutotext {
