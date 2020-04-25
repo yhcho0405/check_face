@@ -35,6 +35,21 @@
 </head>
 
 <body>
+
+  <div class="modal">
+    <div class="mymodal">
+      <button id="xxx" onclick="$('.modal').hide();">X</button>
+      <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit    = "DAN-skstlvizye03"
+      data-ad-width   = "300"
+      data-ad-height  = "250"></ins>
+      <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+      <a id="retry" href="/"><button type="button" class="remove-image">다른 사진으로 해보기</button></a>
+    </div>
+  </div>
+
+
   	<script src="imagecrop.js">
 	</script>
 	<script src="script.js">
@@ -77,6 +92,7 @@
     <br>
     <div class="kakao">
       <button id="crop" class="croping-image"><span class='fa fa-crop'></span>자르기</button>
+      <br>
       <ins class="kakao_ad_area" style="display:none;"
        data-ad-unit    = "DAN-rhdtfb6583ee"
        data-ad-width   = "300"
@@ -96,7 +112,7 @@
 
         <div id="grp"></div>
 
-      <a id="retry" href="/"><button type="button" class="remove-image">다른 사진으로 해보기<span class="image-title"></span></button></a>
+      <button type="button" onclick="$('.modal').show();"class="remove-image">다른 사진으로 해보기<span class="image-title"></span></button>
     </div>
   </div>
 </div>
@@ -318,6 +334,10 @@
         else if (g_sn < 20) {
           result_text += "여자입니다.";
         }
+
+
+
+
 
 
         document.getElementById("grp").innerHTML = '\
