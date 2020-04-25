@@ -47,7 +47,6 @@
 
 #tutodiv {
   float: left;
-  width:200px;
   height: 100%;
   position: relative;
   left: 50%;
@@ -55,13 +54,12 @@
 }
 
 #tuto {
-  width:200px;
   height: 100%;
+  margin-right:10px;
 }
 
 #tutotext {
   display:inline-block;
-  padding: 5px;
   height: 100%;
 }
 
