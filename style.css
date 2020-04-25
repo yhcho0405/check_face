@@ -12,7 +12,7 @@
 }
 .mymodal {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 340px; /* Could be more or less, depending on screen size */
@@ -137,6 +137,11 @@
   padding: 0 15px 15px 15px;
   color: #222;
   margin-bottom: 30%;
+}
+
+.adfit {
+  width: 125%;
+  margin-left: -12.5%;
 }
 
 .drag-text {
