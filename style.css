@@ -754,3 +754,7 @@ footer {
 	color: white;
 	background-color: #333333;
 }
+
+.hiddencanvas {
+  display:none;
+}
