@@ -206,83 +206,118 @@
 
         var result_text = "";
 
-        if (g_sn > 75) {
-          result_text += "남자, ";
-        }
-        else if (g_sn <= 75 && g_sn >= 60) {
-          result_text += "여자 섞인 남자, ";
-        }
-        else if (g_sn < 60 && g_sn > 40) {
-          result_text += "중성, ";
-        }
-        else if (g_sn <= 40 && g_sn >= 25) {
-          result_text += "남자 섞인 여자, ";
-        }
-        else if (g_sn < 25) {
-          result_text += "여자, ";
-        }
-
-        var tmp = Math.max(g_n0, g_n1, g_n2, g_n3, g_n4);
-        switch (tmp) { // 나이
-          case g_n0:
-            result_text += "8세 이하, ";
-            break;
-          case g_n1:
-            result_text += "8 ~ 15세, ";
-            break;
-          case g_n2:
-            result_text += "15 ~ 27세, ";
-            break;
-          case g_n3:
-            result_text += "27 ~ 35세, ";
-            break;
-          case g_n4:
-            result_text += "35세 이상, ";
-            break;
-        }
 
         var gi0 = g_i0;
         var gi1 = g_i1;
         var gi2 = g_i2;
         var gi3 = g_i3;
+        var chk = 0;
         tmp = Math.max(gi0, gi1, gi2, gi3);
         switch (tmp) { // 인종 1
           case gi0:
-            result_text += "동양계, ";
+            result_text += "당신은 황인의 부드러운 인상";
             gi0 = 0;
+            chk = 0;
             break;
           case gi1:
-            result_text += "아프리카계, ";
+            result_text += "당신은 아프리카인의 늠름한 인상";
             gi1 = 0;
+            chk = 0;
             break;
           case gi2:
-            result_text += "라틴계, ";
+            result_text += "당신은 라틴인의 매력적인 구릿빛 피부";
             gi2 = 0;
+            chk = 1;
             break;
           case gi3:
-            result_text += "서양계, ";
+            result_text += "당신은 서양인의 뚜렷한 이목구비";
             gi3 = 0;
+            chk = 1;
             break;
         }
 
+        var chkk;
         tmp = Math.max(gi0, gi1, gi2, gi3);
         if(tmp >= 25) {
+          if(chk) {
+            result_text += "와";
+          } else {
+            result_text += "과";
+          }
           switch (tmp) { // 인종 1
             case gi0:
-              result_text += "동양계, ";
+              result_text += " 동양인의 부드러운 인상";
+              chkk = 0;
               break;
             case gi1:
-              result_text += "아프리카계, ";
+              result_text += " 아프리카인의 늠름한 인상";
+              chkk = 0;
               break;
             case gi2:
-              result_text += "라틴계, ";
+              result_text += " 라틴인의 매력적인 구릿빛 피부";
+              chkk = 1;
               break;
             case gi3:
-              result_text += "서양계, ";
+              result_text += " 서양인의 뚜렷한 이목구비";
+              chkk = 1;
               break;
+          }
+          if (chkk) {
+            result_text += "을";
+          } else {
+            result_text += "를";
+          }
+        } else {
+          if (chk) {
+            result_text += "을";
+          } else {
+            result_text += "를";
           }
         }
 
+        result_text += " 가지고 ";
+
+
+        var tmp = Math.max(g_n0, g_n1, g_n2, g_n3, g_n4);
+        switch (tmp) { // 나이
+          case g_n0:
+            result_text += "8세 이하의 베이비 페이스를 탑재한 ";
+            break;
+          case g_n1:
+            result_text += "8 ~ 15세의 성장기 페이스를 탑재한 ";
+            break;
+          case g_n2:
+            result_text += "15 ~ 27세의 사회 초년생 외모를 탑재한 ";
+            break;
+          case g_n3:
+            result_text += "27 ~ 39세의 이모, 삼촌의 외모를 탑재한 ";
+            break;
+          case g_n4:
+            result_text += "39세 이상의 연륜이 느껴지는 외모를 탑재한 ";
+            break;
+        }
+
+        if (g_sn > 80) {
+          result_text += "남자입니다.";
+        }
+        else if (g_sn <= 80 && g_sn >= 60) {
+          result_text += "여성스러운 외모를 가진 남자입니다.";
+        }
+        else if (g_sn < 60 && g_sn > 40) {
+          if (g_sn > g_sy) {
+            result_text += "두 성별의 매력을 모두 가진 남자입니다.";
+          } else if (g_sn < g_sy) {
+            result_text += "두 성별의 매력을 모두 가진 여자입니다.";
+          } else {
+            result_text += "성별은 모르겠어요...";
+          }
+        }
+        else if (g_sn <= 40 && g_sn >= 20) {
+          result_text += "남성스러운 외모를 가진 여자입니다.";
+        }
+        else if (g_sn < 20) {
+          result_text += "여자입니다.";
+        }
 
 
         document.getElementById("grp").innerHTML = '\
@@ -445,7 +480,7 @@
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea1b34144a26d9e"></script>
 
     <footer>
-      <p>Copyright © 2020. yhcho All rights reserved.</p>
+      <p>Copyright © 2020. Moriapo All rights reserved.</p>
       <address></address>
     </footer>
   </body>
