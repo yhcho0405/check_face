@@ -2,9 +2,7 @@
 <html>
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164530014-1">
-    </script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -15,6 +13,12 @@
 
         gtag('config', 'UA-164530014-1');
     </script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164530014-1">
+    </script>
+
     <script data-ad-client="ca-pub-2832302066425462" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
     </script>
     <meta name="naver-site-verification" content="b9635e66ed1e5c903b68878a4c4219ec6c394d10" />
@@ -36,10 +40,12 @@
     <meta property="og:description" content="인공지능이 보는 내 얼굴은 어떨까? 나는 사실 서구적인 얼굴? 성별, 나이, 인종을 하나 하나 분석해 드립니다.">
     <meta property="og:locale" content="ko_KR">
     <meta property="og:image" content="/image/og_image.png">
+
+    <link rel="stylesheet" href="css/vendor/jquery.Jcrop.css" />
+    <link rel="stylesheet" href="css/demo.css" />
 </head>
 
 <body>
-
     <div class="modal">
         <div class="mymodal">
             <button id="xxx" onclick="$('.modal').hide();">X</button>
@@ -56,12 +62,10 @@
     </script>
     <script src="script.js">
     </script>
-    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
-    </script>
 
     <div class="file-upload">
         <div class="image-upload-wrap">
-            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+            <input  type='file' class="file-upload-input" id="file-input" accept="image/* "/>
             <div class="drag-text">
                 <h3>클릭하거나 드래그해서 사진을 추가하세요!</h3>
                 <img id="upimg" src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjNjY0NTQyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PGc+PHBhdGggZD0iTTY5LjMyNCwyNy4zMDNoLTM4LjMyYy0wLjgyOCwwLTEuNS0wLjY3MS0xLjUtMS41czAuNjcyLTEuNSwxLjUtMS41aDM4LjMyYzAuODI4LDAsMS41LDAuNjcxLDEuNSwxLjUgICBTNzAuMTUyLDI3LjMwMyw2OS4zMjQsMjcuMzAzeiI+PC9wYXRoPjwvZz48Zz48cGF0aCBkPSJNNTAuMTY0LDczLjA3OWMtMC44MjgsMC0xLjUtMC42NzEtMS41LTEuNVYzNS45NzZjMC0wLjgyOSwwLjY3Mi0xLjUsMS41LTEuNXMxLjUsMC42NzEsMS41LDEuNXYzNS42MDQgICBDNTEuNjY0LDcyLjQwOCw1MC45OTIsNzMuMDc5LDUwLjE2NCw3My4wNzl6Ij48L3BhdGg+PC9nPjxnPjxwYXRoIGQ9Ik02Ni4wMzksNTAuMjgyYy0wLjM0NSwwLTAuNjktMC4xMTgtMC45NzQtMC4zNTlMNTAuMjQxLDM3LjI1OEwzNy41ODcsNDkuODQ1Yy0wLjU4NSwwLjU4My0xLjUzNiwwLjU4My0yLjEyMS0wLjAwNiAgIGMtMC41ODQtMC41ODctMC41ODItMS41MzcsMC4wMDYtMi4xMjFsMTMuNjM1LTEzLjU2M2MwLjU1NC0wLjU1MSwxLjQzOC0wLjU4MywyLjAzMi0wLjA3N2wxNS44NzYsMTMuNTYzICAgYzAuNjMsMC41MzgsMC43MDQsMS40ODUsMC4xNjYsMi4xMTVDNjYuODg0LDUwLjEwNCw2Ni40NjMsNTAuMjgyLDY2LjAzOSw1MC4yODJ6Ij48L3BhdGg+PC9nPjwvc3ZnPg==">
@@ -78,7 +82,9 @@
             </div>
         </div>
 
-        <div class="hidden" id="tutoimg">
+
+        <section class="hidden" id="sectionResize">
+        <div id="tutoimg">
             <div id="tutodiv"><img id="tuto" src="/image/tuto.png"></div>
             <div id="tutotext">
                 <br>
@@ -91,15 +97,21 @@
                 <p>왼쪽 그림을 참고하세요.</p>
             </div>
         </div>
-        <section class="hidden" id="sectionResize">
-            <div class="image-resize" id="imageResize"><img class="resize-img" id="fullImage"></div>
-            <br>
+          <center>
+            <div id="result">
+              <p>
+                <a href="https://developer.mozilla.org/en/DOM/window.URL"></a>
+                <a href="https://developer.mozilla.org/en/DOM/FileReader"></a>
+              </p>
+            </div>
+            <p id="actions">
+              <button type="button" id="crop" class="croping-image">자르기</button>
+            </p>
             <div class="kakao">
-                <button id="crop" class="croping-image"><span class='fa fa-crop'></span>자르기</button>
-                <br>
                 <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-rhdtfb6583ee" data-ad-width="300" data-ad-height="250"></ins>
                 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
             </div>
+          </center>
         </section>
 
         <div class="file-upload-content">
@@ -133,6 +145,26 @@
         </a></p>
         <address></address>
     </footer>
+
+
+
+    <script src="js/vendor/canvas-to-blob.js"></script>
+    <script src="js/load-image.js"></script>
+    <script src="js/load-image-scale.js"></script>
+    <script src="js/load-image-meta.js"></script>
+    <script src="js/load-image-fetch.js"></script>
+    <script src="js/load-image-orientation.js"></script>
+    <script src="js/load-image-exif.js"></script>
+    <script src="js/load-image-exif-map.js"></script>
+    <script src="js/load-image-iptc.js"></script>
+    <script src="js/load-image-iptc-map.js"></script>
+    <!--
+      jQuery and Jcrop are not required by JavaScript Load Image,
+      but included for the demo
+    -->
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/jquery.Jcrop.js"></script>
+    <script src="js/demo/demo.js"></script>
 </body>
 
 <!--
@@ -160,13 +192,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Copyright (c) 2020 by Josh (https://codepen.io/joshhunt18/pen/NPKEzQ)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 -->
 

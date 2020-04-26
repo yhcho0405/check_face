@@ -1,3 +1,6 @@
+
+
+
 function readURL(input) {
     if (input.files && input.files[0]) {
 
@@ -11,7 +14,7 @@ function readURL(input) {
             imgg.onload = function() {
               $('.image-resize').css('width', this.width);
             }
-            // hi bye
+            // hi
 
             $(imgg).attr('src', e.target.result);*/
             var imggg = new Image();
@@ -29,6 +32,7 @@ function readURL(input) {
 
 
                 $('.resize-img').attr('src', document.getElementById('paracanvas').toDataURL("image/jpg"));
+                $("canvas").remove("#paracanvas");
 
 
                 $('#sectionResize').removeClass('hidden');
@@ -36,15 +40,6 @@ function readURL(input) {
                 var newImage = new imageCrop('.resize-img', 150, 150);
 
 
-                $('#crop').on('click', function() {
-                    var results = newImage.crop();
-                    $('.file-upload-image').attr('src', results.img.src);
-                    $('#sectionResize').addClass('hidden');
-                    $('#tutoimg').addClass('hidden');
-                    $('#sectionThumbnail').removeClass('hidden');
-                    $('.file-upload-content').show();
-                    predict();
-                });
             }
             $(imggg).attr('src', e.target.result);
 
@@ -70,10 +65,3 @@ function readURL(input) {
 //$('.file-upload-content').hide();
 //$('.image-upload-wrap').show();
 //}
-
-$('.image-upload-wrap').bind('dragover', function() {
-    $('.image-upload-wrap').addClass('image-dropping');
-});
-$('.image-upload-wrap').bind('dragleave', function() {
-    $('.image-upload-wrap').removeClass('image-dropping');
-});

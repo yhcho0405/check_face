@@ -668,6 +668,7 @@ section {
 	width: 130px;
 	height: 50px;
 	margin: 0;
+	margin-top: 10px;
 	margin-bottom: 10px;
 	color: #fff;
 	background: #25B837;
@@ -754,6 +755,7 @@ footer {
 	color: white;
 	background-color: #333333;
 }
+
 
 .hiddencanvas {
   display:none;
