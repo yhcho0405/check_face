@@ -91,6 +91,7 @@ $(function () {
     }
     if (iptc) {
       displayTagData(iptcNode, iptc.getAll())
+
     }
   }
 
@@ -122,9 +123,6 @@ $(function () {
       loadImage.writeExifData(data.imageHead, data, 'Orientation', 1)
       img.toBlob(function (blob) {
         loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
-          content
-            .attr('href', loadImage.createObjectURL(newBlob))
-            .attr('download', 'image.jpg')
         })
       }, 'image/jpeg')
     }
@@ -158,6 +156,7 @@ $(function () {
           )
         )
     }
+
   }
 
   /**
@@ -167,6 +166,8 @@ $(function () {
    */
   function fileChangeHandler(event) {
     event.preventDefault()
+    $('.image-upload-wrap').hide();
+    $('#sectionResize').removeClass('hidden');
     var originalEvent = event.originalEvent
     var target = originalEvent.dataTransfer || originalEvent.target
     var file = target && target.files && target.files[0]
@@ -174,6 +175,35 @@ $(function () {
       return
     }
     displayImage(file)
+    setTimeout(function() {
+      var imgNode = result.find('img, canvas')
+      var img = imgNode[0]
+      var pixelRatio = window.devicePixelRatio || 1
+      var margin = img.width / pixelRatio >= 140 ? 40 : 0
+      imgNode
+        // eslint-disable-next-line new-cap
+        .Jcrop(
+          {
+            setSelect: [
+              margin,
+              margin,
+              img.width / pixelRatio - margin,
+              img.height / pixelRatio - margin
+            ],
+            onSelect: function (coords) {
+              coordinates = coords
+            },
+            onRelease: function () {
+              coordinates = null
+            }
+          },
+          function () {
+            jcropAPI = this
+          }
+        )
+        .parent()
+      }, 1000);
+
   }
 
   /**
@@ -258,7 +288,16 @@ $(function () {
       )
       coordinates = null
     }
+    setTimeout(function() {
+      $('.file-upload-image').attr('src', document.getElementsByTagName('canvas')[0].toDataURL("image/png"));
+      $('#sectionResize').addClass('hidden');
+      $('#tutoimg').addClass('hidden');
+      $('#sectionThumbnail').removeClass('hidden');
+      $('.file-upload-content').show();
+      predict();
+    }, 300);
   })
+
 
   $('#cancel').on('click', function (event) {
     event.preventDefault()
