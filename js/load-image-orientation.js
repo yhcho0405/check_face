@@ -9,20 +9,6 @@
  * https://opensource.org/licenses/MIT
  */
 
-/*
-
-Exif orientation values to correctly display the letter F:
-
-  1       2       3       4          5           6           7           8
-
-██████  ██████      ██  ██      ██████████  ██                  ██  ██████████
-██          ██      ██  ██      ██  ██      ██  ██          ██  ██      ██  ██
-████      ████    ████  ████    ██          ██████████  ██████████          ██
-██          ██      ██  ██
-██          ██  ██████  ██████
-
-*/
-
 /* global define, module, require */
 
 ;(function (factory) {
@@ -43,7 +29,6 @@ Exif orientation values to correctly display the letter F:
 })(function (loadImage) {
   'use strict'
 
-  var originalTransform = loadImage.transform
   var originalHasCanvasOption = loadImage.hasCanvasOption
   var originalHasMetaOption = loadImage.hasMetaOption
   var originalTransformCoordinates = loadImage.transformCoordinates
@@ -67,37 +52,10 @@ Exif orientation values to correctly display the letter F:
     img.src = testImageURL
   })()
 
-  loadImage.transform = function (img, options, callback, file, data) {
-    originalTransform.call(
-      loadImage,
-      img,
-      options,
-      function (img, data) {
-        if (data) {
-          var exifOrientation = data.exif && data.exif.get('Orientation')
-          if (
-            loadImage.orientation &&
-            exifOrientation > 4 &&
-            exifOrientation < 9
-          ) {
-            // Automatic image orientation switched image dimensions
-            var originalWidth = data.originalWidth
-            var originalHeight = data.originalHeight
-            data.originalWidth = originalHeight
-            data.originalHeight = originalWidth
-          }
-        }
-        callback(img, data)
-      },
-      file,
-      data
-    )
-  }
-
   // Determines if the target image should be a canvas element:
   loadImage.hasCanvasOption = function (options) {
     return (
-      (options.orientation === true && !loadImage.orientation) ||
+      (!!options.orientation === true && !loadImage.orientation) ||
       (options.orientation > 1 && options.orientation < 9) ||
       originalHasCanvasOption.call(loadImage, options)
     )
@@ -109,6 +67,65 @@ Exif orientation values to correctly display the letter F:
       (options && options.orientation === true && !loadImage.orientation) ||
       originalHasMetaOption.call(loadImage, options)
     )
+  }
+
+  // Transform image orientation based on
+  // the given EXIF orientation option:
+  loadImage.transformCoordinates = function (canvas, options) {
+    originalTransformCoordinates.call(loadImage, canvas, options)
+    var ctx = canvas.getContext('2d')
+    var width = canvas.width
+    var height = canvas.height
+    var styleWidth = canvas.style.width
+    var styleHeight = canvas.style.height
+    var orientation = options.orientation
+    if (!(orientation > 1 && orientation < 9)) {
+      return
+    }
+    if (orientation > 4) {
+      canvas.width = height
+      canvas.height = width
+      canvas.style.width = styleHeight
+      canvas.style.height = styleWidth
+    }
+    switch (orientation) {
+      case 2:
+        // horizontal flip
+        ctx.translate(width, 0)
+        ctx.scale(-1, 1)
+        break
+      case 3:
+        // 180° rotate left
+        ctx.translate(width, height)
+        ctx.rotate(Math.PI)
+        break
+      case 4:
+        // vertical flip
+        ctx.translate(0, height)
+        ctx.scale(1, -1)
+        break
+      case 5:
+        // vertical flip + 90 rotate right
+        ctx.rotate(0.5 * Math.PI)
+        ctx.scale(1, -1)
+        break
+      case 6:
+        // 90° rotate right
+        ctx.rotate(0.5 * Math.PI)
+        ctx.translate(0, -height)
+        break
+      case 7:
+        // horizontal flip + 90 rotate right
+        ctx.rotate(0.5 * Math.PI)
+        ctx.translate(width, -height)
+        ctx.scale(-1, 1)
+        break
+      case 8:
+        // 90° rotate left
+        ctx.rotate(-0.5 * Math.PI)
+        ctx.translate(-width, 0)
+        break
+    }
   }
 
   // Transforms coordinate and dimension options
@@ -154,7 +171,7 @@ Exif orientation values to correctly display the letter F:
         newOptions.bottom = options.top
         break
       case 5:
-        // vertical flip + 90° rotate right
+        // vertical flip + 90 rotate right
         newOptions.left = options.top
         newOptions.top = options.left
         newOptions.right = options.bottom
@@ -168,7 +185,7 @@ Exif orientation values to correctly display the letter F:
         newOptions.bottom = options.left
         break
       case 7:
-        // horizontal flip + 90° rotate right
+        // horizontal flip + 90 rotate right
         newOptions.left = options.bottom
         newOptions.top = options.right
         newOptions.right = options.top
@@ -191,63 +208,5 @@ Exif orientation values to correctly display the letter F:
       newOptions.sourceHeight = options.sourceWidth
     }
     return newOptions
-  }
-
-  // Transform image orientation based on the given EXIF orientation option:
-  loadImage.transformCoordinates = function (canvas, options) {
-    originalTransformCoordinates.call(loadImage, canvas, options)
-    var orientation = options.orientation
-    if (!(orientation > 1 && orientation < 9)) {
-      return
-    }
-    var ctx = canvas.getContext('2d')
-    var width = canvas.width
-    var height = canvas.height
-    var styleWidth = canvas.style.width
-    var styleHeight = canvas.style.height
-    if (orientation > 4) {
-      canvas.width = height
-      canvas.height = width
-      canvas.style.width = styleHeight
-      canvas.style.height = styleWidth
-    }
-    switch (orientation) {
-      case 2:
-        // horizontal flip
-        ctx.translate(width, 0)
-        ctx.scale(-1, 1)
-        break
-      case 3:
-        // 180° rotate left
-        ctx.translate(width, height)
-        ctx.rotate(Math.PI)
-        break
-      case 4:
-        // vertical flip
-        ctx.translate(0, height)
-        ctx.scale(1, -1)
-        break
-      case 5:
-        // vertical flip + 90° rotate right
-        ctx.rotate(0.5 * Math.PI)
-        ctx.scale(1, -1)
-        break
-      case 6:
-        // 90° rotate right
-        ctx.rotate(0.5 * Math.PI)
-        ctx.translate(0, -height)
-        break
-      case 7:
-        // horizontal flip + 90° rotate right
-        ctx.rotate(0.5 * Math.PI)
-        ctx.translate(width, -height)
-        ctx.scale(-1, 1)
-        break
-      case 8:
-        // 90° rotate left
-        ctx.rotate(-0.5 * Math.PI)
-        ctx.translate(-width, 0)
-        break
-    }
   }
 })

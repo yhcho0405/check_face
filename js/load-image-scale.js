@@ -45,7 +45,7 @@
 
   // Returns transformed options, allows to override e.g.
   // maxWidth, maxHeight and crop options based on the aspectRatio.
-  // gets img, options, data passed as arguments:
+  // gets img, options passed as arguments:
   loadImage.getTransformedOptions = function (img, options) {
     var aspectRatio = options.aspectRatio
     var newOptions
@@ -168,7 +168,7 @@
     }
     if (useCanvas) {
       // eslint-disable-next-line no-param-reassign
-      options = loadImage.getTransformedOptions(img, options, data || {})
+      options = loadImage.getTransformedOptions(img, options, data)
       sourceX = options.left || 0
       sourceY = options.top || 0
       if (options.sourceWidth) {
@@ -225,17 +225,11 @@
     if (useCanvas) {
       pixelRatio = options.pixelRatio
       if (pixelRatio > 1) {
-        if (parseInt(img.style.width, 10) === width / pixelRatio) {
-          // Source image is already scaled according to device pixel ratio
-          canvas.style.width = destWidth / pixelRatio + 'px'
-          canvas.style.height = destHeight / pixelRatio + 'px'
-        } else {
-          canvas.style.width = destWidth + 'px'
-          canvas.style.height = destHeight + 'px'
-          destWidth *= pixelRatio
-          destHeight *= pixelRatio
-          canvas.getContext('2d').scale(pixelRatio, pixelRatio)
-        }
+        canvas.style.width = destWidth + 'px'
+        canvas.style.height = destHeight + 'px'
+        destWidth *= pixelRatio
+        destHeight *= pixelRatio
+        canvas.getContext('2d').scale(pixelRatio, pixelRatio)
       }
       downsamplingRatio = options.downsamplingRatio
       if (

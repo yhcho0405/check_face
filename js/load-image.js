@@ -39,6 +39,7 @@
         // eslint-disable-next-line no-param-reassign
         file = blob
         url = loadImage.createObjectURL(file)
+
       } else {
         url = file
         if (options && options.crossOrigin) {
