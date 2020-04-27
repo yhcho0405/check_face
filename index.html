@@ -77,24 +77,6 @@
             <div class="adfit">
                 <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1h7u95zg8ojlk" data-ad-width="300" data-ad-height="250"></ins>
                 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-
-                <a id="kakao-link-btn" href="javascript:;">
-                  <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-                </a>
-
-                <script type="text/javascript">
-                  Kakao.init('cc0cd09174f6084b9fee5cdd8be3e5a7');
-
-                  Kakao.Link.createCustomButton({
-                    container: '#kakao-link-btn',
-                    templateId: 24093,
-                    templateArgs: {
-                      'title': '제목 영역입니다.',
-                      'description': '설명 영역입니다.'
-                    }
-                  });
-
-                </script>
                 <br>
                 <br>
                 <br>
@@ -141,6 +123,21 @@
                 <div id="loading"></div>
 
                 <div id="grp"></div>
+
+                <a id="kakao-link-btn" href="javascript:;">
+                  <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+                </a>
+                <script type="text/javascript">
+                  Kakao.init('befd89eac090a23fc0b8e4aee845af0c');
+                  Kakao.Link.createCustomButton({
+                    container: '#kakao-link-btn',
+                    templateId: 24097,
+                    templateArgs: {
+                      'title': '인공지능이 보는 내 얼굴은 어떨까?',
+                      'description': '인공지능이 보는 내 얼굴은 어떨까? 나는 사실 서구적인 얼굴? 성별, 나이, 인종을 하나 하나 분석해 드립니다.'
+                    }
+                  });
+                </script>
 
                 <button type="button" onclick="$('.modal').show();" class="remove-image">다른 사진으로 해보기<span class="image-title"></span></button>
                 <br>
