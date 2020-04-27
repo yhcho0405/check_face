@@ -756,7 +756,9 @@ footer {
 	background-color: #333333;
 }
 
-
+#kakao-link-btn{
+	width:35px;
+}
 .hiddencanvas {
   display:none;
 }
