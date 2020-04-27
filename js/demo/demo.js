@@ -295,7 +295,7 @@ $(function () {
       $('#sectionThumbnail').removeClass('hidden');
       $('.file-upload-content').show();
       predict();
-    }, 300);
+    }, 100);
   })
 
 

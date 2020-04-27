@@ -756,9 +756,16 @@ footer {
 	background-color: #333333;
 }
 
-#kakao-link-btn{
-	width:35px;
-}
+
+
+#kakao-link-btn:link {text-decoration:none; color:none;}
+#kakao-link-btn:visited {text-decoration:none; color:none;}
+#kakao-link-btn:active {text-decoration:none; color:none;}
+#kakao-link-btn:hover {text-decoration:none; color:none;}
+
+
+
+
 .hiddencanvas {
   display:none;
 }

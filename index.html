@@ -74,6 +74,10 @@
             </div>
             <div class="dsc">사진은 분석 이외의 목적으로 절대 사용되지 않습니다.</div>
             <br>
+            <a id="kakao-link-btn" href="javascript:;">
+              <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+            </a>
+            <br>
             <div class="adfit">
                 <ins class="kakao_ad_area" style="display:none;" data-ad-unit="DAN-1h7u95zg8ojlk" data-ad-width="300" data-ad-height="250"></ins>
                 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
@@ -125,19 +129,9 @@
                 <div id="grp"></div>
 
                 <a id="kakao-link-btn" href="javascript:;">
-                  <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
+                  <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
                 </a>
-                <script type="text/javascript">
-                    Kakao.init('befd89eac090a23fc0b8e4aee845af0c');
-                    Kakao.Link.createCustomButton({
-                      container: '#kakao-link-btn',
-                      templateId: 24097,
-                      templateArgs: {
-                        'title': '인공지능이 보는 내 얼굴은 어떨까?',
-                        'description': '인공지능이 보는 내 얼굴은 어떨까? 나는 사실 서구적인 얼굴? 성별, 나이, 인종을 하나 하나 분석해 드립니다.'
-                      }
-                    });
-                </script>
+
                 <br>
                 <br>
                 <button type="button" onclick="$('.modal').show();" class="remove-image">다른 사진으로 해보기<span class="image-title"></span></button>
@@ -187,6 +181,17 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/jquery.Jcrop.js"></script>
     <script src="js/demo/demo.js"></script>
+    <script type="text/javascript">
+        Kakao.init('befd89eac090a23fc0b8e4aee845af0c');
+        Kakao.Link.createCustomButton({
+          container: '#kakao-link-btn',
+          templateId: 24097,
+          templateArgs: {
+            'title': '인공지능이 보는 내 얼굴은 어떨까?',
+            'description': '인공지능이 보는 내 얼굴은 어떨까? 나는 사실 서구적인 얼굴? 성별, 나이, 인종을 하나 하나 분석해 드립니다.'
+          }
+        });
+    </script>
 </body>
 
 <!--
