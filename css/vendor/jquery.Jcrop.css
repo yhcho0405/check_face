@@ -161,5 +161,5 @@
 /* Fix for twitter bootstrap et al. */
 .jcrop-holder img,
 img.jcrop-preview {
-  max-width: 80%;
+  max-width: none;
 }
