@@ -765,6 +765,9 @@ footer {
 	width:40px;
 	height:40px;
 }
+#kakao-link-btn {
+	position: relative;
+}
 #kakao-link-btn:link {text-decoration:none; color:none;}
 #kakao-link-btn:visited {text-decoration:none; color:none;}
 #kakao-link-btn:active {text-decoration:none; color:none;}
