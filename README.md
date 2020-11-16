@@ -1,5 +1,5 @@
 
-#### [link](https://www.checkface.site/)
+#### [link / containing kakao adfit](https://www.checkface.site/)
 If you can't connect?
 
 try this
